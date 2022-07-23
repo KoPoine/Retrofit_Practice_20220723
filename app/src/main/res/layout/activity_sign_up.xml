@@ -51,6 +51,7 @@
             android:text="비밀번호"/>
 
         <EditText
+            android:id="@+id/passwordEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호 입력"
@@ -95,6 +96,7 @@
             android:text="중복 검사를 해주세요."/>
 
         <Button
+            android:id="@+id/signUpBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
