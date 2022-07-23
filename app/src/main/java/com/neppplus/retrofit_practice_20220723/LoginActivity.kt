@@ -15,18 +15,9 @@ class LoginActivity : BaseActivity() {
 
     lateinit var mBinding : ActivityLoginBinding
 
-//    retrofit 멤버 변수
-    lateinit var retrofit : Retrofit
-    lateinit var apiList : APIList
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-
-//        retrofit 관련 클래스 및 인터페이스 초기화
-        retrofit = ServerApi.getRetrofit()
-        apiList = retrofit.create(APIList::class.java)
-
         setupEvents()
         setValues()
     }
