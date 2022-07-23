@@ -1,7 +1,6 @@
 package com.neppplus.retrofit_practice_20220723.api
 
-import com.neppplus.retrofit_practice_20220723.datas.BaseResponse
-import org.json.JSONObject
+import com.neppplus.retrofit_practice_20220723.datas.BasicResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -14,6 +13,6 @@ interface APIList {
     fun getRequestLogin (
     @Field("email") email : String,
     @Field("password") password : String
-    ) : Call<JSONObject>
+    ) : Call<BasicResponse>
 
 }
