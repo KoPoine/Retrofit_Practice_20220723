@@ -41,6 +41,7 @@ class SignUpActivity : BaseActivity() {
                             Log.d("응답", br.toString())
                             mBinding.checkEmailTxt.text = br.message
                             Toast.makeText(mContext, br.message, Toast.LENGTH_SHORT).show()
+                            emailOk = true
                         }
                         else {
                             val errorBodyStr = response.errorBody()!!.string()
@@ -48,6 +49,7 @@ class SignUpActivity : BaseActivity() {
                             val message = jsonObj.getString("message")
                             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                             mBinding.checkEmailTxt.text = "중복 검사를 해주세요."
+                            emailOk = false
                         }
                     }
 
@@ -71,6 +73,7 @@ class SignUpActivity : BaseActivity() {
                             val br = response.body()!!
                             mBinding.checkNickTxt.text = br.message
                             Toast.makeText(mContext, br.message, Toast.LENGTH_SHORT).show()
+                            nickOk = true
                         }
                         else {
 //                            errorBody를 Json Parsing
@@ -80,6 +83,7 @@ class SignUpActivity : BaseActivity() {
 
                             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                             mBinding.checkNickTxt.text = "중복 검사를 해주세요."
+                            nickOk = false
                         }
                     }
 
@@ -115,7 +119,26 @@ class SignUpActivity : BaseActivity() {
             }
 
 //            4. 회원가입 로직 실행
+            val inputEmail = mBinding.emailEdt.text.toString()
+            val inputNick = mBinding.nickEdt.text.toString()
+            apiList.getRequestSignUp(inputEmail, inputPw, inputNick)
+                .enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val br = response.body()!!
+                            val nickname = br.data.user.nick_name
+                            Toast.makeText(mContext, "${nickname}님 가입을 환영합니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                    }
 
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+                })
         }
     }
 
