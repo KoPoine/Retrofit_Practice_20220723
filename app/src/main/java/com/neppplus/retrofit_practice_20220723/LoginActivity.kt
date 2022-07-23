@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import org.json.JSONObject
-import com.neppplus.retrofit_practice_20220723.api.APIList
-import com.neppplus.retrofit_practice_20220723.api.ServerApi
 import com.neppplus.retrofit_practice_20220723.databinding.ActivityLoginBinding
 import com.neppplus.retrofit_practice_20220723.datas.BasicResponse
+import com.neppplus.retrofit_practice_20220723.utils.ContextUtil
 import retrofit2.*
 
 class LoginActivity : BaseActivity() {
@@ -36,8 +35,20 @@ class LoginActivity : BaseActivity() {
                     Log.d("로그인", responseStr)
                     if (response.isSuccessful) {
 //                        응답이 성공 (로그인 로직 성공 - id / pw 일치)
-                        val rb = response.body()
-                        Log.d("로그인 성공", rb.toString())
+                        val br = response.body()!!
+                        Log.d("로그인 성공", br.toString())
+
+//                        로그인 토큰 저장
+                        val token = br.data.token
+                        ContextUtil.setLoginToken(mContext, token)
+
+//                        자동 로그인 체크 여부 저장
+                        ContextUtil.setAutoLogin(mContext, mBinding.autoLoginCb.isChecked)
+
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
+                        finish()
+
                     }
                     else {
 //                        응답 실패 (로그인 로직 실패)
@@ -54,9 +65,7 @@ class LoginActivity : BaseActivity() {
                     Log.d("연결", "실패")
                 }
             })
-//            val myIntent = Intent(mContext, MainActivity::class.java)
-//            startActivity(myIntent)
-//            finish()
+
         }
 
         mBinding.signUpBtn.setOnClickListener {
