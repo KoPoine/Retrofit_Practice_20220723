@@ -15,6 +15,15 @@ interface APIList {
     @Field("password") password : String
     ) : Call<BasicResponse>
 
+//    회원가입
+    @FormUrlEncoded
+    @PUT("/user")
+    fun getRequestSignUp (
+    @Field("email") email : String,
+    @Field("password") password : String,
+    @Field("nick_name") nickname : String
+    ) : Call<BasicResponse>
+
 //    이메일 중복 체크
     @GET("/user_check")
     fun getRequestCheckValue (
