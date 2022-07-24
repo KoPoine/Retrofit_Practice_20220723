@@ -75,6 +75,6 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        mBinding.autoLoginCb.isChecked = ContextUtil.getAutoLogin(mContext)
     }
 }

@@ -33,7 +33,15 @@ class MainActivity : BaseActivity() {
 
     //    이벤트 동작 로직 작성(setOnClickListener)
     override fun setupEvents() {
+//        로그아웃 버튼 클릭 이벤트
+        mBinding.logoutBtn.setOnClickListener {
 
+            ContextUtil.setLoginToken(mContext, "")
+
+            val myIntent = Intent(mContext, LoginActivity::class.java)
+            startActivity(myIntent)
+            finish()
+        }
     }
 
     //    첫 화면 동작시 데이터 연결 (초기화)
