@@ -29,68 +29,13 @@ class SignUpActivity : BaseActivity() {
 //        이메일 중복 확인버튼 클릭 이벤트 처리
         mBinding.checkEmailBtn.setOnClickListener {
             val inputEmail = mBinding.emailEdt.text.toString()
-
-            apiList.getRequestCheckValue("EMAIL", inputEmail)
-                .enqueue(object : Callback<BasicResponse>{
-                    override fun onResponse(
-                        call: Call<BasicResponse>,
-                        response: Response<BasicResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            val br = response.body()!!
-                            Log.d("응답", br.toString())
-                            mBinding.checkEmailTxt.text = br.message
-                            Toast.makeText(mContext, br.message, Toast.LENGTH_SHORT).show()
-                            emailOk = true
-                        }
-                        else {
-                            val errorBodyStr = response.errorBody()!!.string()
-                            val jsonObj = JSONObject(errorBodyStr)
-                            val message = jsonObj.getString("message")
-                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
-                            mBinding.checkEmailTxt.text = "중복 검사를 해주세요."
-                            emailOk = false
-                        }
-                    }
-
-                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-                    }
-                })
+            checkValue("EMAIL", inputEmail)
         }
 
 //        닉네임 중복 확인버튼 클릭 이벤트 처리
         mBinding.checkNickBtn.setOnClickListener {
             val inputNick = mBinding.nickEdt.text.toString()
-            apiList.getRequestCheckValue("NICK_NAME", inputNick)
-                .enqueue(object : Callback<BasicResponse>{
-                    override fun onResponse(
-                        call: Call<BasicResponse>,
-                        response: Response<BasicResponse>
-                    ) {
-                        if (response.isSuccessful) {
-//                            성공 된 값
-                            val br = response.body()!!
-                            mBinding.checkNickTxt.text = br.message
-                            Toast.makeText(mContext, br.message, Toast.LENGTH_SHORT).show()
-                            nickOk = true
-                        }
-                        else {
-//                            errorBody를 Json Parsing
-                            val errorBodyStr = response.errorBody()!!.string()
-                            val jsonObj = JSONObject(errorBodyStr)
-                            val message = jsonObj.getString("message")
-
-                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
-                            mBinding.checkNickTxt.text = "중복 검사를 해주세요."
-                            nickOk = false
-                        }
-                    }
-
-                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-                    }
-                })
+            checkValue("NICK_NAME", inputNick)
         }
 
 //        회원 가입 로직
@@ -147,7 +92,46 @@ class SignUpActivity : BaseActivity() {
     }
 
 //    [도전과제]
-    fun checkValue() {
+    fun checkValue(type : String, value : String) {
 //        이메일과 닉네임을 동시에 중복 검사할 수 있는 로직으로 작성(생성자를 통해서 분류를 생각해보자)
+        apiList.getRequestCheckValue(type, value).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+//                생성자로 받아온 type에 따른 response 분기 처리
+                if (response.isSuccessful) {
+//                    응답이 성공적으로 왔을때 (code : 200)
+                    val br = response.body()!!
+                    if (type == "EMAIL") {
+                        mBinding.checkEmailTxt.text = br.message
+                        emailOk = true
+                    }
+                    else {
+                        mBinding.checkNickTxt.text = br.message
+                        nickOk = true
+                    }
+                }
+                else {
+//                    응답이 성공적이지 않을때 (code : 200외의 경우)
+                    val errorBodyStr = response.errorBody()!!.string()
+                    val jsonObj = JSONObject(errorBodyStr)
+                    val message = jsonObj.getString("message")
+
+                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+
+                    if (type == "EMAIL") {
+                        mBinding.checkEmailTxt.text = "중복 검사를 해주세요."
+                        emailOk = false
+                    }
+                    else {
+//                        type == "NICK_NAME"
+                        mBinding.checkNickTxt.text = "중복 검사를 해주세요."
+                        nickOk = false
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
     }
 }
