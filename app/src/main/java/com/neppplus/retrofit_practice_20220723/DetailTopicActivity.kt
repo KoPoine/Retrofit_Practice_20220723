@@ -2,6 +2,7 @@ package com.neppplus.retrofit_practice_20220723
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.neppplus.retrofit_practice_20220723.databinding.ActivityDetailTopicBinding
@@ -28,7 +29,13 @@ class DetailTopicActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        mBinding.vote1Btn.setOnClickListener {
+            voteSide(mTopicData.sides[0].id)
+        }
 
+        mBinding.vote2Btn.setOnClickListener {
+            voteSide(mTopicData.sides[1].id)
+        }
     }
 
     override fun setValues() {
@@ -75,6 +82,27 @@ class DetailTopicActivity : BaseActivity() {
 
         mBinding.side1VoteCountTxt.text = "${mTopicData.sides[0].vote_count}표"
         mBinding.side2VoteCountTxt.text = "${mTopicData.sides[1].vote_count}표"
+    }
+
+    fun voteSide(sideId : Int) {
+        val token = ContextUtil.getLoginToken(mContext)
+        apiList.getRequestTopicVote(token, sideId).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    val br = response.body()!!
+
+                    Toast.makeText(mContext, br.message, Toast.LENGTH_SHORT).show()
+
+                    mTopicData = br.data.topic
+
+                    setTopicDataToUi()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
     }
 }
 
