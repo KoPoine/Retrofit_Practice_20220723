@@ -8,11 +8,17 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/mainTxt"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainRecyclerView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!" />
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"/>
 
     </LinearLayout>
 </layout>
