@@ -50,6 +50,7 @@ class MainActivity : BaseActivity() {
 
     //    첫 화면 동작시 데이터 연결 (초기화)
     override fun setValues() {
+        userImg.visibility = View.VISIBLE
 
         getTopicListFromServer()
 

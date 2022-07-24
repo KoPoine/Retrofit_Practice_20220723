@@ -2,6 +2,7 @@ package com.neppplus.retrofit_practice_20220723
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -36,10 +37,22 @@ class DetailTopicActivity : BaseActivity() {
         mBinding.vote2Btn.setOnClickListener {
             voteSide(mTopicData.sides[1].id)
         }
+
+        backBtn.setOnClickListener {
+            finish()
+        }
+
+        userImg.setOnClickListener {
+//            프로필 화면으로 이동
+            finish()
+        }
     }
 
     override fun setValues() {
 //가져온 데이터 UI 처리 등등
+        backBtn.visibility = View.VISIBLE
+        userImg.visibility = View.VISIBLE
+
         getDetailTopicDataFromServer()
 
         setTopicDataToUi()

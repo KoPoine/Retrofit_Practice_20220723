@@ -2,6 +2,7 @@ package com.neppplus.retrofit_practice_20220723
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.neppplus.retrofit_practice_20220723.databinding.ActivitySignUpBinding
@@ -85,10 +86,15 @@ class SignUpActivity : BaseActivity() {
                     }
                 })
         }
+
+        backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun setValues() {
-
+        titleTxt.text = "회원가입"
+        backBtn.visibility = View.VISIBLE
     }
 
 //    [도전과제]

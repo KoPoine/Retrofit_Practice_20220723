@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,11 @@ abstract class BaseActivity : AppCompatActivity() {
     //    retrofit 멤버 변수
     lateinit var retrofit : Retrofit
     lateinit var apiList : APIList
+
+//    커스텀 액션바 버튼 관련 멤버 변수
+    lateinit var backBtn : ImageView
+    lateinit var titleTxt : TextView
+    lateinit var userImg : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +66,8 @@ abstract class BaseActivity : AppCompatActivity() {
         val myToolbar = defaultActionBar.customView.parent as Toolbar
         myToolbar.setContentInsetsAbsolute(0,0)
 
-        val userImg = defaultActionBar.customView.findViewById<ImageView>(R.id.userImg)
-
-        userImg.visibility = View.VISIBLE
-
-        userImg.setOnClickListener {
-            Toast.makeText(mContext, "유저이미지 눌림", Toast.LENGTH_SHORT).show()
-        }
+        backBtn = defaultActionBar.customView.findViewById(R.id.backBtn)
+        titleTxt = defaultActionBar.customView.findViewById(R.id.titleTxt)
+        userImg = defaultActionBar.customView.findViewById(R.id.userImg)
     }
 }
