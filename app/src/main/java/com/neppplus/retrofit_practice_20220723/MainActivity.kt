@@ -4,11 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.neppplus.retrofit_practice_20220723.adapters.TopicRecyclerViewAdapter
 import com.neppplus.retrofit_practice_20220723.databinding.ActivityMainBinding
+import com.neppplus.retrofit_practice_20220723.datas.TopicData
 
 class MainActivity : BaseActivity() {
 
     lateinit var mBinding: ActivityMainBinding
+
+    lateinit var mTopicAdapter : TopicRecyclerViewAdapter
+
+    val mTopicList = ArrayList<TopicData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,5 +32,8 @@ class MainActivity : BaseActivity() {
     //    첫 화면 동작시 데이터 연결 (초기화)
     override fun setValues() {
 
+        mTopicAdapter = TopicRecyclerViewAdapter(mContext, mTopicList)
+        mBinding.mainRecyclerView.adapter = mTopicAdapter
+        mBinding.mainRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 }
