@@ -34,9 +34,9 @@ interface APIList {
     @PATCH("/user")
     fun getRequestEditUserInfo(
     @Header("X-Http-Token") token: String,
-    @Field("current_password") currentPw : String,
-    @Field("new_password") newPw : String,
-    @Field("nick_name") nickname: String,
+    @Field("current_password") currentPw : String?,
+    @Field("new_password") newPw : String?,
+    @Field("nick_name") nickname: String?,
     ) : Call<BasicResponse>
 
 //    로그인
