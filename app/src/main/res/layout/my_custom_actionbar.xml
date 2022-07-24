@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/white"
+    android:paddingHorizontal="20dp">
+
+<!--    start-->
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/short_left"
+        android:visibility="gone"
+        android:layout_gravity="center|start"/>
+
+
+<!--    middle-->
+    <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="콜로세움"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+<!--    end-->
+    <ImageView
+        android:id="@+id/userImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/user"
+        android:visibility="gone"
+        android:layout_gravity="center|end"/>
+
+    <ImageView
+        android:id="@+id/homeBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="gone"
+        android:src="@drawable/bottom_nav_home_removebg"
+        android:layout_gravity="center|end"/>
+
+</FrameLayout>
