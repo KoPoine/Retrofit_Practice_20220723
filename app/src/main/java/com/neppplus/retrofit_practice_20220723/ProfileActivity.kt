@@ -1,5 +1,8 @@
 package com.neppplus.retrofit_practice_20220723
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -97,9 +100,45 @@ class ProfileActivity : BaseActivity() {
         }
 
 //        회원 탈퇴 로직 작성
-    }
+        mBinding.deleteBtn.setOnClickListener {
+//            사용자가 실제로 탈퇴의사를 가지고 누른게 맞는지 한 번더 확인한 후에
+            val alert = AlertDialog.Builder(mContext)
+                .setTitle("제목")
+                .setMessage("물어볼 내용")
+                .setPositiveButton("긍정 문구", DialogInterface.OnClickListener { dialogInterface, i ->
+//                  회원탈퇴를 진행
+//                    deleteUser()
+                    val myIntent = Intent(mContext, LoginActivity::class.java)
+
+                    startActivity(myIntent)
+//                    지금 인텐트로 뜨는 화면 외의 다른 모든 Activity Stack 삭제
+                    finishAffinity()
+                })
+                .setNegativeButton("부정 문구", null)
+                .show()
+        }
+   }
 
     override fun setValues() {
         mBinding.currentNickTxt.text = GlobalData.loginUser?.nick_name
+    }
+
+//    회원 탈퇴 API 로직
+    fun deleteUser() {
+    val token = ContextUtil.getLoginToken(mContext)
+        apiList.getRequestDeleteUser(token, "동의").enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(mContext, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    val myIntent = Intent(mContext, LoginActivity::class.java)
+                    startActivity(myIntent)
+                    finishAffinity()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
     }
 }

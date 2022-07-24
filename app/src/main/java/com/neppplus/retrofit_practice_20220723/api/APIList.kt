@@ -29,6 +29,13 @@ interface APIList {
     ) : Call<BasicResponse>
 
 //    user
+//    회원 탈퇴
+    @DELETE("/user")
+    fun getRequestDeleteUser(
+    @Header("X-Http-Token") token: String,
+    @Query ("text") text : String
+    ) : Call<BasicResponse>
+
 //    회원 정보 수정
     @FormUrlEncoded
     @PATCH("/user")
