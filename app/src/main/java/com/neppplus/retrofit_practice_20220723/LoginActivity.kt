@@ -9,6 +9,7 @@ import org.json.JSONObject
 import com.neppplus.retrofit_practice_20220723.databinding.ActivityLoginBinding
 import com.neppplus.retrofit_practice_20220723.datas.BasicResponse
 import com.neppplus.retrofit_practice_20220723.utils.ContextUtil
+import com.neppplus.retrofit_practice_20220723.utils.GlobalData
 import retrofit2.*
 
 class LoginActivity : BaseActivity() {
@@ -44,6 +45,8 @@ class LoginActivity : BaseActivity() {
 
 //                        자동 로그인 체크 여부 저장
                         ContextUtil.setAutoLogin(mContext, mBinding.autoLoginCb.isChecked)
+
+                        GlobalData.loginUser = br.data.user
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)

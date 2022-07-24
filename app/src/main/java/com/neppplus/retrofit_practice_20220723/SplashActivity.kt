@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import com.neppplus.retrofit_practice_20220723.datas.BasicResponse
 import com.neppplus.retrofit_practice_20220723.utils.ContextUtil
+import com.neppplus.retrofit_practice_20220723.utils.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +33,7 @@ class SplashActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
+                    GlobalData.loginUser = br.data.user
                     isTokenOk = true
                 }
                 else {

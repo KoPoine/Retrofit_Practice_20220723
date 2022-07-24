@@ -20,6 +20,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/currentNickTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,6 +33,16 @@
                 android:text="닉네임 변경"/>
 
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/changeNickEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="변경할 닉네임 입력"
+            android:visibility="gone"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:inputType="text"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,6 +65,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="비밀번호는 8자 이상 입력해주세요."/>
+
+        <EditText
+            android:id="@+id/currentPwEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:hint="비밀번호 변경을 위해 현재 비밀번호 입력"/>
 
         <Button
             android:id="@+id/saveChangedBtn"
