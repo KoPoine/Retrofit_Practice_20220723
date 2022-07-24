@@ -1,5 +1,6 @@
 package com.neppplus.retrofit_practice_20220723
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,6 +45,8 @@ class DetailTopicActivity : BaseActivity() {
 
         userImg.setOnClickListener {
 //            프로필 화면으로 이동
+            val myIntent = Intent(mContext, ProfileActivity::class.java)
+            startActivity(myIntent)
             finish()
         }
     }

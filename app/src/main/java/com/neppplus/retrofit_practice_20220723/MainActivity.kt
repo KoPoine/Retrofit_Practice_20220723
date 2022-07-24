@@ -46,6 +46,10 @@ class MainActivity : BaseActivity() {
             startActivity(myIntent)
             finish()
         }
+        userImg.setOnClickListener {
+            val myIntent = Intent(mContext, ProfileActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     //    첫 화면 동작시 데이터 연결 (초기화)
