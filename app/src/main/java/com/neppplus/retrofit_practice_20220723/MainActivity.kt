@@ -4,6 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.retrofit_practice_20220723.adapters.TopicRecyclerViewAdapter
@@ -21,7 +26,6 @@ class MainActivity : BaseActivity() {
     lateinit var mBinding: ActivityMainBinding
 
     lateinit var mTopicAdapter : TopicRecyclerViewAdapter
-
     val mTopicList = ArrayList<TopicData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
