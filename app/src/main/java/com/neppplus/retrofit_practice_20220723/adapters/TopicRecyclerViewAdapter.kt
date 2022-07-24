@@ -1,6 +1,7 @@
 package com.neppplus.retrofit_practice_20220723.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.neppplus.retrofit_practice_20220723.DetailTopicActivity
 import com.neppplus.retrofit_practice_20220723.R
 import com.neppplus.retrofit_practice_20220723.datas.TopicData
 import org.w3c.dom.Text
@@ -29,6 +31,12 @@ class TopicRecyclerViewAdapter (
             Glide.with(mContext)
                 .load(item.img_url)
                 .into(backgroundImg)
+
+            itemView.setOnClickListener {
+                val myIntent = Intent(mContext, DetailTopicActivity::class.java)
+                myIntent.putExtra("topicData", item)
+                mContext.startActivity(myIntent)
+            }
         }
     }
 

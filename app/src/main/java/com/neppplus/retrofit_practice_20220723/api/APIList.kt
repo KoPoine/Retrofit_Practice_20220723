@@ -13,6 +13,14 @@ interface APIList {
     @Header("X-Http-Token") token: String
     ) : Call<BasicResponse>
 
+//    topic
+//    세부 토픽 데이터 받아오기
+    @GET("/topic/{topic_id}")
+    fun getRequestDetailTopic (
+    @Header("X-Http-Token") token: String,
+    @Path ("topic_id") topicId :Int
+    ) : Call<BasicResponse>
+
 //    user
 //    로그인
     @FormUrlEncoded
